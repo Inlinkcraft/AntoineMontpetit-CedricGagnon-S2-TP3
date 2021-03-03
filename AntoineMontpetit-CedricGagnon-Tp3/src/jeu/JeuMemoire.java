@@ -38,35 +38,45 @@ public class JeuMemoire implements Memorisable{
 	}
 	
 	public String toString() {
-		
+		String st = "";
+		for(int ligne = 0; ligne < LIGNE; ligne++) {
+			for(int colonne = 0; colonne < COLONNE; colonne++) {
+				st += ajouterEspaces(LONGUEUR_CHAINE,grilleDeJeu[ligne][colonne].toStringCourt()) + "|";
+			}
+			st += "\n";
+		}
+		return st;
 	}
 	
 	private String ajouterEspaces(int pLongueur, String pNom) {
-		
+		do {
+			pNom += " ";
+		}while(pNom.length() < pLongueur);
+		return pNom;
 	}
 	
 	public String getNomForme(int pX, int pY) {
-		
+		return "";
 	}
 	
 	public ArrayList<Point> jouerOrdi(){
-		
+		return new ArrayList<Point>();
 	}
 	
 	private Point choisirForme() {
-		
+		return new Point();
 	}
 	
 	public boolean jouerHumain(int pX, int pY) {
-		
+		return false;
 	}
 	
 	public int getNiveau() {
-		
+		return 0;
 	}
 	
 	public VecteurFormes getVecteur() {
-		
+		return vecteurFormes;
 	}
 	
 	public Forme[][] getGrille(){
@@ -77,4 +87,9 @@ public class JeuMemoire implements Memorisable{
 		
 	}
 
+	public static void main(String[] args) {
+		JeuMemoire jm = new JeuMemoire();
+		jm.toString();
+	}
+	
 }
