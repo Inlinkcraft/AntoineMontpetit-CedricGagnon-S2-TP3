@@ -24,6 +24,7 @@ public class JeuMemoire implements Memorisable{
 
 	private void preparerVecteurFormes() {
 		vecteurFormes = new VecteurFormes();
+		vecteurFormes.remplir(LIGNE*COLONNE);
 		vecteurFormes.melanger();
 	}
 
@@ -32,7 +33,7 @@ public class JeuMemoire implements Memorisable{
 		ArrayList<Forme> listFormes = vecteurFormes.getVecteur();
 		for(int ligne = 0; ligne < LIGNE; ligne++) {
 			for(int colonne = 0; colonne < COLONNE; colonne++) {
-				grilleDeJeu[ligne][colonne] = listFormes.get(ligne*colonne + colonne);
+				grilleDeJeu[ligne][colonne] = listFormes.get(ligne*COLONNE + colonne);
 			}
 		}
 	}
@@ -89,7 +90,8 @@ public class JeuMemoire implements Memorisable{
 
 	public static void main(String[] args) {
 		JeuMemoire jm = new JeuMemoire();
-		jm.toString();
+		System.out.println(jm);
+		System.out.println(jm.vecteurFormes);
 	}
 	
 }
