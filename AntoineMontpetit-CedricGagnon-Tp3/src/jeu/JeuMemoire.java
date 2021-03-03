@@ -3,6 +3,7 @@ package jeu;
 import java.util.ArrayList;
 import java.awt.Point;
 import formes.Forme;
+import formes.VecteurFormes;
 
 public class JeuMemoire implements Memorisable{
 
