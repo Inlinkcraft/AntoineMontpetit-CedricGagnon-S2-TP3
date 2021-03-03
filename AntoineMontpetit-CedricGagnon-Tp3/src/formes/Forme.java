@@ -100,7 +100,7 @@ public abstract class Forme implements Comparable<Forme>
 	{
 		return nom + " " + couleur.toString();
 	}
-	
+
 	public String toStringCourt()
 	{
 		return nom + " " + couleur.toString();
