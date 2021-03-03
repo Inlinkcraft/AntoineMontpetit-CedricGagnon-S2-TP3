@@ -49,20 +49,44 @@ public class VecteurFormes implements ManipulerVecteur {
 	public String toString() {
 		String out="";
 		for(int i=0;i<vecteur.size();i++) {
-			out+=vecteur.get(i).getNom()+", "+vecteur.get(i).getCouleur()+" | ";
+			out+=((Forme) vecteur.get(i)).toStringCourt()+"\n";
 		}
 		return(out);
 	}
 	
-	public void trier() {}
+	public void trier() {
+		for(int i=0;i<vecteur.size();i++) {
+			int temp=i;
+			for(int j=i;j<vecteur.size();j++) {
+				if(vecteur.get(j).compareTo(vecteur.get(temp))<0) {
+					temp=j;
+				}
+			}
+			permuter(i,temp);
+		}
+	}
 	
-	public void melanger() {}
+	public void melanger() {
+		for(int i=0;i<vecteur.size();i++) {
+			permuter(i,(int)(Math.random()*(vecteur.size()-i))+i);
+		}
+	}
 	
-	private void permuter(int pPremier, int pDeuxieme) {}
+	private void permuter(int pPremier, int pDeuxieme) {
+		if(pPremier >=0 && pDeuxieme >=0 && pPremier <=vecteur.size() && pDeuxieme <=vecteur.size()) {
+			Forme temp = vecteur.get(pPremier);
+			vecteur.set(pPremier,vecteur.get(pDeuxieme));
+			vecteur.set(pDeuxieme, temp);
+		}
+	}
 	
 	public static void main(String[] args) {
 		VecteurFormes test = new VecteurFormes();
 		test.remplir(36);
+		System.out.println(test+"\n");
+		test.trier();
+		System.out.println(test);
+		test.melanger();
 		System.out.println(test);
 	}
 }
