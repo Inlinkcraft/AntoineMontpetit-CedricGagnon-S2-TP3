@@ -29,15 +29,14 @@ public class VecteurFormes implements ManipulerVecteur
 					{
 						vecteur.add(new Cercle(10));
 					}
+					else if (vecteur.size() % 3 == 1)
+					{
+						vecteur.add(new Rectangle(10, 10));
+					}
 					else
-						if (vecteur.size() % 3 == 1)
-						{
-							vecteur.add(new Rectangle(10, 10));
-						}
-						else
-						{
-							vecteur.add(new Triangle(10, 10, 10));
-						}
+					{
+						vecteur.add(new Triangle(10, 10, 10));
+					}
 					vecteur.get(vecteur.size() - 1).setCouleur(
 							Couleur.values()[((vecteur.size() - 1) / 3) % 6]);
 				}
