@@ -1,73 +1,64 @@
 package formes;
 
-import exceptions.FormeException;
+import exceptions.*;
 
 /**
- * Definition d'un rectangle
- * 
- * @author Antoine Montpetit
- * @version 0.0.1 (hiver 2021)
- *
+ * Permet l'utilisation d'une forme Rectangle
+ * @author Cédric Gagnon
+ * @version 17 Fev 2021
  */
 public class Rectangle extends Forme
 {
-
 	/**
-	 * La hauteur du rectangle
+	 * Hauteur du rectangle
 	 */
 	private int hauteur;
-
 	/**
-	 * La largeur du rectangle
+	 * Largeur du rectangle
 	 */
 	private int largeur;
 
 	/**
-	 * Créé un rectangle d'une hauteur et largeur definie
-	 * 
-	 * @param pHauteur - la hauteur du rectangle
-	 * @param pLargeur - la largeur du rectangle
-	 * @throws FormeException - si la largeur ou hauteur n'est pas valide
+	 * Créée un rectangle, si les paramètres sont valides
+	 * @param pHauteur : Hauteur du rectangle à construire
+	 * @param pLargeur : Largeur du rectangle à construire
+	 * @throws FormeException : Indique la présence de paramètre(s) invalide(s)
 	 */
 	public Rectangle(int pHauteur, int pLargeur) throws FormeException
 	{
 		super("Rectangle");
-		if (validerHauteur(pHauteur) && validerLargeur(pLargeur))
+		if (validerLargeur(pLargeur) && validerHauteur(pHauteur))
 		{
 			hauteur = pHauteur;
 			largeur = pLargeur;
 		}
 		else
 		{
-			throw new FormeException("La hauteur ou largeur est invalide");
+			throw (new FormeException("Dimension/s de rectangle invalide/s pour construction"));
 		}
 	}
 
 	/**
-	 * Retourne la hauteur
-	 * 
-	 * @return - la hauteur
+	 * Retourne la hauteur du rectangle
+	 * @return la hauteur du rectangle
 	 */
 	public int getHauteur()
 	{
-		return hauteur;
+		return (hauteur);
 	}
 
 	/**
-	 * Retourne la largeur
-	 * 
-	 * @return - la largeur
+	 * Retourne la largeur du rectangle
+	 * @return la largeur du rectangle
 	 */
 	public int getLargeur()
 	{
-		return largeur;
+		return (largeur);
 	}
 
-
 	/**
-	 * Definie une nouvelle hauteur si celle-ci est valide
-	 * 
-	 * @param pHauteur - la nouvelle hauteur
+	 * Change la hauteur du rectangle, si le paramètre est valide
+	 * @param pHauteur : La hauteur à utiliser
 	 */
 	public void setHauteur(int pHauteur)
 	{
@@ -78,9 +69,8 @@ public class Rectangle extends Forme
 	}
 
 	/**
-	 * Definie une nouvelle Largeur si celle-ci est valide
-	 * 
-	 * @param pLargeur - la nouvelle largeur
+	 * Change la largeur du rectangle, si le paramètre est valide
+	 * @param pLargeur : La largeur à utiliser
 	 */
 	public void setLargeur(int pLargeur)
 	{
@@ -91,43 +81,49 @@ public class Rectangle extends Forme
 	}
 
 	/**
-	 * Valide la hauteur donner entre les deux born déféni
-	 * 
-	 * @param pHauteur - la hauteur
-	 * @return - true si la hauteur est valide
+	 * Valide une valeur pour utilisation comme hauteur
+	 * @param pHauteur : La valeur à valider
+	 * @return vrai si la valeur est valide
 	 */
-	private boolean validerHauteur(int pHauteur)
+	private static boolean validerHauteur(int pHauteur)
 	{
-		return pHauteur >= MIN_VAL && pHauteur <= MAX_VAL;
+		return (pHauteur >= MIN_VAL && pHauteur <= MAX_VAL);
 	}
 
 	/**
-	 * valide la largeur donner entre les deux born déféni
-	 * 
-	 * @param pLargeur - la largeur
-	 * @return - true si la largeur est valide
+	 * Valide une valeur pour utilisation comme largeur
+	 * @param pLargeur : La valeur à valider
+	 * @return vrai si la valeur est valide
 	 */
-	private boolean validerLargeur(int pLargeur)
+	private static boolean validerLargeur(int pLargeur)
 	{
-		return pLargeur >= MIN_VAL && pLargeur <= MAX_VAL;
+		return (pLargeur >= MIN_VAL && pLargeur <= MAX_VAL);
 	}
 
-	@Override
+	/**
+	 * Calcule l'aire du rectangle
+	 * @return l'aire du rectangle
+	 */
 	public int calculerSurface()
 	{
-		return largeur * hauteur;
+		return (largeur * hauteur);
 	}
 
-	@Override
+	/**
+	 * Calcule le périmètre du rectangle
+	 * @return le périmètre du rectangle
+	 */
 	public int calculerPerimetre()
 	{
-		return 2 * largeur + 2 * hauteur;
+		return (2 * largeur + 2 * hauteur);
 	}
 
-	@Override
+	/**
+	 * Remplace la fonction toString de la classe Object
+	 * @return la String représentant le rectangle
+	 */
 	public String toString()
 	{
-		return super.toString() + " " + hauteur + " " + largeur;
+		return (super.toString() + " " + hauteur + ", " + largeur);
 	}
-
 }

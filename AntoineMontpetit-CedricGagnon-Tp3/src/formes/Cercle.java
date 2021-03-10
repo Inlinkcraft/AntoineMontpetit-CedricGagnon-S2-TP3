@@ -1,29 +1,23 @@
 package formes;
 
-import exceptions.FormeException;
+import exceptions.*;
 
 /**
- * 
- * Defenition d'un cercle
- * 
- * @author Antoine Montpetit
- * @version 0.0.1 (hiver 2021)
- *
+ * Permet l'utilisation d'une forme Cercle
+ * @author Cédric Gagnon
+ * @version 17 Fev 2021
  */
 public class Cercle extends Forme
 {
-
 	/**
-	 * Le rayon du cercle
+	 * Rayon du cercle
 	 */
 	private int rayon;
 
 	/**
-	 * Construit un cercle avec un rayon dénie
-	 * 
-	 * @param pRayon - grandeur du rayon
-	 * @throws FormeException - FormeException si le cercle a un rayon invalide
-	 * 
+	 * Créée un cercle, si le paramètre est valide 
+	 * @param pRayon : Le rayon du cercle créé
+	 * @throws FormeException : Indique que le paramètre est invalide
 	 */
 	public Cercle(int pRayon) throws FormeException
 	{
@@ -34,24 +28,22 @@ public class Cercle extends Forme
 		}
 		else
 		{
-			throw new FormeException();
+			throw (new FormeException("Rayon invalide pour construction"));
 		}
 	}
 
 	/**
-	 * Retourne le rayon
-	 * 
-	 * @return - le rayon
+	 * Retourne le rayon du cercle
+	 * @return le rayon du cercle
 	 */
 	public int getRayon()
 	{
-		return rayon;
+		return (rayon);
 	}
 
 	/**
-	 * Définit un nouveau rayon si celui-ci est valide
-	 * 
-	 * @param pRayon - nouveau rayon
+	 * Change le rayon du Cercle, si le paramètre est valide
+	 * @param pRayon : Le rayon à utiliser
 	 */
 	public void setRayon(int pRayon)
 	{
@@ -62,32 +54,39 @@ public class Cercle extends Forme
 	}
 
 	/**
-	 * Valide si un rayon est entre les borne défénie
-	 * 
-	 * @param pRayon - le rayon a valider
-	 * @return - true si le rayon est valide
+	 * Valide une valeur pour utilisation comme rayon
+	 * @param pRayon : La valeur à valider
+	 * @return vrai si la valeur est valide
 	 */
-	private boolean validerRayon(int pRayon)
+	private static boolean validerRayon(int pRayon)
 	{
-		return pRayon >= MIN_VAL && pRayon <= MAX_VAL;
+		return (pRayon >= MIN_VAL && pRayon <= MAX_VAL);
 	}
 
-	@Override
+	/**
+	 * Calcule l'aire du cercle à l'unité près
+	 * @return l'aire du cercle à l'unité près
+	 */
 	public int calculerSurface()
 	{
-		return (int) (Math.PI * Math.pow(rayon, 2));
+		return ((int) (Math.PI * Math.pow(rayon, 2)));
 	}
 
-	@Override
+	/**
+	 * Calcule la circonférence du cercle à l'unité près
+	 * @return la circonférence du cercle à l'unité près
+	 */
 	public int calculerPerimetre()
 	{
-		return (int) (rayon * 2 * Math.PI);
+		return ((int) (Math.PI * 2 * rayon));
 	}
 
-	@Override
+	/**
+	 * Remplace la fonction toString de la classe Object
+	 * @return la string représentant le cercle
+	 */
 	public String toString()
 	{
-		return super.toString() + " " + rayon;
+		return (super.toString() + " " + rayon);
 	}
-
 }

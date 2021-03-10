@@ -3,22 +3,42 @@ package formes;
 import java.util.ArrayList;
 import exceptions.*;
 
+/**
+ * Vecteur permettant d'être rempli, mélangé et trié d'objets de la classe Forme.
+ * @author Cédric Gagnon
+ * @version 10 Mar 2021
+ */
 public class VecteurFormes implements ManipulerVecteur
 {
+	/**
+	 * Vecteur contenant les formes 
+	 */
 	ArrayList<Forme> vecteur;
 
+	/**
+	 * Construit un vecteur
+	 */
 	public VecteurFormes()
 	{
+		vecteur = new ArrayList<Forme>();
 	}
 
+	/**
+	 * Valide un nombre comme étant positif ou 0
+	 * @param pNbr : nombre à valider
+	 * @return true si le nombre est positif ou 0
+	 */
 	private static boolean validerNbrFormes(int pNbr)
 	{
 		return (pNbr >= 0);
 	}
 
+	/**
+	 * Remplit le vecteur d'un nombre de formes
+	 * @param pNbr : le nombre de formes à mettre dans le vecteur
+	 */
 	public void remplir(int pNbr)
 	{
-		vecteur = new ArrayList<Forme>();
 		if (validerNbrFormes(pNbr))
 		{
 			while (vecteur.size() < pNbr)
@@ -56,11 +76,20 @@ public class VecteurFormes implements ManipulerVecteur
 		}
 	}
 
+	/**
+	 * Retourne le vecteur
+	 * @return le vecteur
+	 */
 	public ArrayList<Forme> getVecteur()
 	{
 		return (vecteur);
 	}
 
+	
+	/**
+	 * Remplace le toString  de la classe Object
+	 * @return la représentation String du vecteur
+	 */
 	@Override
 	public String toString()
 	{
@@ -72,6 +101,9 @@ public class VecteurFormes implements ManipulerVecteur
 		return (out);
 	}
 
+	/**
+	 * Trie le vecteur
+	 */
 	public void trier()
 	{
 		for (int i = 0; i < vecteur.size(); i++)
@@ -88,6 +120,9 @@ public class VecteurFormes implements ManipulerVecteur
 		}
 	}
 
+	/**
+	 * Mélange le vecteur
+	 */
 	public void melanger()
 	{
 		for (int i = 0; i < vecteur.size(); i++)
@@ -96,6 +131,11 @@ public class VecteurFormes implements ManipulerVecteur
 		}
 	}
 
+	/**
+	 * Permute deux formes dans le vecteur
+	 * @param pPremier : L'index du premier élément à permuter
+	 * @param pDeuxieme : L'index du deuxième élément à permuter
+	 */
 	private void permuter(int pPremier, int pDeuxieme)
 	{
 		if (pPremier >= 0 && pDeuxieme >= 0 && pPremier <= vecteur.size()
@@ -107,6 +147,10 @@ public class VecteurFormes implements ManipulerVecteur
 		}
 	}
 
+	/**
+	 * -
+	 * @param args
+	 */
 	public static void main(String[] args)
 	{
 		VecteurFormes test = new VecteurFormes();
