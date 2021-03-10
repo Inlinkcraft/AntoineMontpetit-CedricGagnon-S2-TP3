@@ -176,16 +176,5 @@ public class JeuMemoire implements Memorisable{
 	public void setNiveauPlusUn() {
 		niveau=Math.min(niveau+1,6);
 	}
-
-	/**
-	 * -
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		JeuMemoire jm = new JeuMemoire();
-		//System.out.println(jm);
-		//System.out.println(jm.vecteurFormes);
-		System.out.println(jm);
-	}
 	
 }

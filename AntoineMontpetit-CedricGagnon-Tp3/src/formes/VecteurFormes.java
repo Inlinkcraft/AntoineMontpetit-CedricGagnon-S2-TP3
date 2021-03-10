@@ -146,19 +146,4 @@ public class VecteurFormes implements ManipulerVecteur
 			vecteur.set(pDeuxieme, temp);
 		}
 	}
-
-	/**
-	 * -
-	 * @param args
-	 */
-	public static void main(String[] args)
-	{
-		VecteurFormes test = new VecteurFormes();
-		test.remplir(36);
-		System.out.println(test + "\n");
-		test.trier();
-		System.out.println(test);
-		test.melanger();
-		System.out.println(test);
-	}
 }
