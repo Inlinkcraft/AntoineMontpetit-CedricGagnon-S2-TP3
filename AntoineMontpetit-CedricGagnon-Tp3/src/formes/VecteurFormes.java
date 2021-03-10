@@ -9,6 +9,7 @@ public class VecteurFormes implements ManipulerVecteur
 
 	public VecteurFormes()
 	{
+		vecteur = new ArrayList<Forme>();
 	}
 
 	private static boolean validerNbrFormes(int pNbr)
@@ -18,7 +19,6 @@ public class VecteurFormes implements ManipulerVecteur
 
 	public void remplir(int pNbr)
 	{
-		vecteur = new ArrayList<Forme>();
 		if (validerNbrFormes(pNbr))
 		{
 			while (vecteur.size() < pNbr)
