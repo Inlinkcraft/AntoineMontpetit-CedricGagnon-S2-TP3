@@ -1,60 +1,52 @@
 package formes;
 
 /**
- * Defenition d'un cercle
- * 
- * @author Antoine Montpetit
- * @version 0.0.1 (hiver 2021)
- *
+ * Contient les types possibles de triangles
+ * @author Cédric Gagnon
+ * @version 17 Fev 2021
  */
 public enum TypeTriangle
 {
-
 	/**
-	 * Les type de triangle
+	 * Types Possibles
 	 */
-	ISOCELE("isocele"), EQUILATERAL("equilateral"), RECTANGLE(
-			"rectangle"), SCALENE("scalene");
-
+	ISOCELE("isocèle"),EQUILATERAL("équilateral"),RECTANGLE("rectangle"),SCALENE("scalène");
+	
 	/**
-	 * Le type de triangle
+	 * La String représentant le type du triangle
 	 */
-	private String type;
-
+	private String type = null;
+	
 	/**
-	 * Créé un Type de triangle
-	 * 
-	 * @param pType - Le type de triangle
+	 * Construit un type
+	 * @param pType : la String représentant le type à former
 	 */
-	private TypeTriangle(String pType)
-	{
-		setType(pType);
+	private TypeTriangle(String pType) {
+		type=pType;
 	}
-
+	
 	/**
-	 * Retourne le type de triangle
-	 * 
-	 * @return - le type de triangle
+	 * Retourne la String représentant le type de triangle
+	 * @return la String représentant le type de triangle
 	 */
-	public String getType()
-	{
-		return type;
+	public String getType() {
+		return(type);
 	}
-
+	
 	/**
-	 * Set un nouveau type de triangle
-	 * 
-	 * @param pType - nouveau type
+	 * Modifie la String représentant le type du triangle
+	 * @param pType : la nouvelle String à assigner
 	 */
-	private void setType(String pType)
-	{
-		type = pType;
+	private void setType(String pType) {
+		type=pType;
 	}
-
-	@Override
-	public String toString()
-	{
-		return type;
+	
+	/**
+	 * Remplace la fonction toString de la classe Object
+	 * @return la représentation String du type de triangle
+	 */
+	public String toString() {
+		return(type);
 	}
-
+	
 }

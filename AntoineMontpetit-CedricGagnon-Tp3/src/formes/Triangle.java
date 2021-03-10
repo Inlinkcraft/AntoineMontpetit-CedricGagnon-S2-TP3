@@ -1,229 +1,180 @@
 package formes;
 
+import exceptions.*;
 import java.util.Arrays;
 
-import exceptions.FormeException;
-
 /**
- * Definition d'un rectangle
- * 
- * @author Antoine Montpetit
- * @version 0.0.1 (hiver 2021)
- *
+ * Permet l'utilisation d'une forme Triangle
+ * @author Cédric Gagnon
+ * @version 17 Fev 2021
  */
 public class Triangle extends Forme
 {
-
 	/**
-	 * Longeur du côter A
+	 * Côtés du triangle
 	 */
-	private int coteA;
-
+	private int coteA, coteB, coteC;
+	
 	/**
-	 * Longeur du côter B
+	 * Type du triangle
 	 */
-	private int coteB;
+	private TypeTriangle type;
 
+	
 	/**
-	 * Longeur du côter C
-	 */
-	private int coteC;
-
-	/**
-	 * Créé un triangle selon trois longeur
-	 * 
-	 * @param pCoteA - longueur du premier coter
-	 * @param pCoteB - longueur du deuxieme coter
-	 * @param pCoteC - longueur du troisieme coter
-	 * @throws FormeException - lancer si le triangle est invalide
+	 * Créée un triangle, si les paramètres sont valides 
+	 * @param pCoteA : Le côté A du triangle créé
+	 * @param pCoteB : Le côté B du triangle créé
+	 * @param pCoteC : Le côté C du triangle créé
+	 * @throws FormeException : Indique qu'un des paramètres est invalide
 	 */
 	public Triangle(int pCoteA, int pCoteB, int pCoteC) throws FormeException
 	{
 		super("Triangle");
 		if (validerCote(pCoteA) && validerCote(pCoteB) && validerCote(pCoteC))
 		{
-			if (estTriangle(pCoteA, pCoteB, pCoteC))
-			{
-				coteA = pCoteA;
-				coteB = pCoteB;
-				coteC = pCoteC;
+			if(estTriangle(pCoteA,pCoteB,pCoteC)) {
+				coteA=pCoteA;
+				coteB=pCoteB;
+				coteC=pCoteC;
+				type=getType();
 			}
-			else
-			{
-				throw new FormeException("Ce n'ai pas un triangle");
+			else {
+				throw(new FormeException("Côtés impossibles pour former un triangle"));
 			}
-
 		}
 		else
 		{
-			throw new FormeException("La hauteur ou largeur est invalide");
+			throw (new FormeException("Un ou plusieurs côtés invalides pour la construction"));
 		}
 	}
 
 	/**
-	 * Get la longueur du coter a
-	 * 
-	 * @return - le cote a
+	 * Retourne le côté A du triangle
+	 * @return le côté A du triangle
 	 */
 	public int getCoteA()
 	{
-		return coteA;
+		return (coteA);
 	}
-
+	
 	/**
-	 * Get la longueur du coter b
-	 * 
-	 * @return - le cote b
+	 * Retourne le côté B du triangle
+	 * @return le côté B du triangle
 	 */
 	public int getCoteB()
 	{
-		return coteB;
+		return (coteB);
 	}
-
+	
 	/**
-	 * Get la longueur du coter c
-	 * 
-	 * @return - le cote c
+	 * Retourne le côté C du triangle
+	 * @return le côté C du triangle
 	 */
 	public int getCoteC()
 	{
-		return coteC;
+		return (coteC);
+	}
+
+
+	/**
+	 * Valide une valeur pour utilisation comme côté du triangle
+	 * @param pCote : La valeur à valider
+	 * @return vrai si la valeur est valide
+	 */
+	private static boolean validerCote(int pCote)
+	{
+		return (pCote >= MIN_VAL && pCote <= MAX_VAL);
 	}
 
 	/**
-	 * Valide le coter donner entre les deux born déféni
-	 * 
-	 * @param pCote - le coter
-	 * @return - true si le coter est valide
+	 * Calcule l'aire du triangle à l'unité près
+	 * @return l'aire du triangle à l'unité près
 	 */
-	private boolean validerCote(int pCote)
-	{
-		return pCote >= MIN_VAL && pCote <= MAX_VAL;
-	}
-
-	@Override
 	public int calculerSurface()
 	{
-		double s = calculerPerimetre() / 2.0;
-		return (int) (Math.sqrt(s * (s - coteA) * (s - coteB) * (s - coteC)));
+		double p=((double)(coteA+coteB+coteC))/2;
+		return ((int)Math.pow((p*(p-coteA)*(p-coteB)*(p-coteC)),0.5));
 	}
 
-	@Override
+	/**
+	 * Calcule le périmètre du triangle à l'unité près
+	 * @return le périmètre du triangle à l'unité près
+	 */
 	public int calculerPerimetre()
 	{
-		return coteA + coteB + coteC;
+		return (coteA+coteB+coteC);
 	}
 
-	@Override
+	/**
+	 * Remplace la fonction toString de la classe Object
+	 * @return la représentation String du triangle
+	 */
 	public String toString()
 	{
-		return super.toString() + " " + getType() + " " + coteA + " " + coteB + " " + coteC;
+		return (super.toString() + " " + type + " " + coteA + ", " + coteB + ", " + coteC);
 	}
-
+	
 	/**
-	 * Get tous les coter eguaux
-	 * 
-	 * @return - le nombre de coter éguaux
+	 * Retourne le nombre de côtés égaux dans le triangle
+	 * @return le nombre de côtés égaux
 	 */
-	private int getNbrCoteEgaux()
-	{
-		int coteEgaux = 0;
-		
-		if (coteA == coteB) 
-		{
-			coteEgaux++;
+	private int getNbrCotesEgaux() {
+		int total=1;
+		if(coteA==coteB && coteB==coteC) {
+			total=3;
 		}
-
-		if (coteA == coteC) 
-		{
-			coteEgaux++;
+		else if(coteA==coteB || coteB==coteC || coteC==coteA) {
+			total=2;
 		}
-			
-		if (coteC == coteB) 
-		{
-			coteEgaux++;
-		}
-		
-		return coteEgaux;
+		return(total);
 	}
-
+	
 	/**
-	 * Trie les coter du plus petit au plus grand
-	 * 
-	 * @return - les coter trier
+	 * Trie les côtés du triangle
+	 * @return les côtés triés
 	 */
-	private int[] getCotesTries()
-	{
-		int[] cotes = new int[]
-		{ coteA, coteB, coteC };
+	private int[] getCotesTries() {
+		int[] cotes = {coteA,coteB,coteC};
 		Arrays.sort(cotes);
-		return cotes;
+		return(cotes);
 	}
-
+	
 	/**
-	 * Determine si le triangle est rectangle
-	 * 
-	 * @return - true si le triangle est rectangle
+	 * Vérifie si le triangle est rectangle
+	 * @return true si le triangle est rectangle
 	 */
-	private boolean estRectangle()
-	{
-		int[] cotesTri = getCotesTries();
-		return Math.pow(cotesTri[2], 2) == Math.pow(cotesTri[1], 2)
-				+ Math.pow(cotesTri[0], 2);
+	private boolean estRectangle() {
+		return(Math.pow(getCotesTries()[0],2)+Math.pow(getCotesTries()[1],2)==Math.pow(getCotesTries()[2],2));
 	}
-
+	
 	/**
-	 * Get le type de triangle
-	 * 
-	 * @return - le type de triangle
+	 * Retourne le type du triangle entre Équilatéral, Rectangle, Isocèle et Scalène
+	 * @return le type du triangle
 	 */
-	public TypeTriangle getType()
-	{
-
-		TypeTriangle typeTriangle = null;
-
-		if (getNbrCoteEgaux() == 3)
-		{
-			typeTriangle = TypeTriangle.EQUILATERAL;
+	public TypeTriangle getType() {
+		TypeTriangle out=TypeTriangle.SCALENE;
+		if(getNbrCotesEgaux()==3) {
+			out=TypeTriangle.EQUILATERAL;
 		}
-		else if (getNbrCoteEgaux() == 1)
-		{
-			typeTriangle = TypeTriangle.ISOCELE;
+		else if(estRectangle()) {
+			out=TypeTriangle.RECTANGLE;
 		}
-		else if (estRectangle())
-		{
-			typeTriangle = TypeTriangle.RECTANGLE;
+		else if(getNbrCotesEgaux()==2) {
+			out=TypeTriangle.ISOCELE;
 		}
-		else
-		{
-			typeTriangle = TypeTriangle.SCALENE;
-		}
-
-		return typeTriangle;
+		
+		return(out);
 	}
-
+	
 	/**
-	 * Valide si le triangle est rectangle
-	 * 
-	 * @param pCoteA - longueur du premier coter
-	 * @param pCoteB - longueur du deuxieme coter
-	 * @param pCoteC - longueur du troisieme coter
-	 * @return - true si le triangle est rectangle
+	 * Teste si il est possible de former un triangle avec les côtés suggérés
+	 * @param pCoteA : Le premier côté à tester
+	 * @param pCoteB : Le deuxième côté à tester
+	 * @param pCoteC : Le troisième côté à tester
+	 * @return true si il est possible de former un triangle avec les côtés
 	 */
-	private static boolean estTriangle(int pCoteA, int pCoteB, int pCoteC)
-	{
-		boolean estTriangleValide = true;
-
-		if (pCoteA + pCoteB < pCoteC)
-			estTriangleValide = false;
-
-		if (pCoteB + pCoteC < pCoteA)
-			estTriangleValide = false;
-
-		if (pCoteC + pCoteA < pCoteB)
-			estTriangleValide = false;
-
-		return estTriangleValide;
+	private static boolean estTriangle(int pCoteA, int pCoteB, int pCoteC) {
+		return(pCoteA+pCoteB>=pCoteC && pCoteA+pCoteC>=pCoteB && pCoteB+pCoteC>=pCoteA);
 	}
-
 }
