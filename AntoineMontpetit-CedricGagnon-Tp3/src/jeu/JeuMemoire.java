@@ -20,6 +20,7 @@ public class JeuMemoire implements Memorisable{
 	public JeuMemoire() {
 		preparerVecteurFormes();
 		preparerGrilleDeJeu();
+		niveau=1;
 	}
 
 	private void preparerVecteurFormes() {
@@ -57,23 +58,31 @@ public class JeuMemoire implements Memorisable{
 	}
 	
 	public String getNomForme(int pX, int pY) {
-		return "";
+		return(grilleDeJeu[pX][pY].toStringCourt().replace(" ",""));
 	}
 	
 	public ArrayList<Point> jouerOrdi(){
-		return new ArrayList<Point>();
+		ArrayList<Point> out = new ArrayList<Point>();
+		while(out.size()<niveau+2) {
+			Point p = choisirForme();
+			if(!out.contains(p)) {
+				out.add(p);
+			}
+		}
+		vecteurPoints=out;
+		return out;
 	}
 	
 	private Point choisirForme() {
-		return new Point();
+		return new Point((int) Math.floor(Math.random()*COLONNE),(int) Math.floor(Math.random()*LIGNE));
 	}
 	
 	public boolean jouerHumain(int pX, int pY) {
-		return false;
+		return(vecteurPoints.remove(0).equals(new Point(pX,pY)));
 	}
 	
 	public int getNiveau() {
-		return 0;
+		return niveau;
 	}
 	
 	public VecteurFormes getVecteur() {
@@ -85,13 +94,14 @@ public class JeuMemoire implements Memorisable{
 	}
 	
 	public void setNiveauPlusUn() {
-		
+		niveau=Math.min(niveau+1,6);
 	}
 
 	public static void main(String[] args) {
 		JeuMemoire jm = new JeuMemoire();
-		System.out.println(jm);
-		System.out.println(jm.vecteurFormes);
+		//System.out.println(jm);
+		//System.out.println(jm.vecteurFormes);
+		System.out.println(jm.jouerOrdi());
 	}
 	
 }
