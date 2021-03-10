@@ -185,7 +185,7 @@ public class JeuMemoire implements Memorisable{
 		JeuMemoire jm = new JeuMemoire();
 		//System.out.println(jm);
 		//System.out.println(jm.vecteurFormes);
-		System.out.println(jm.jouerOrdi());
+		System.out.println(jm);
 	}
 	
 }
