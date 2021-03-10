@@ -1,7 +1,7 @@
 package formes;
 
 /**
- * Defenition d'une forme
+ * Definition d'une forme
  * 
  * @author Antoine Montpetit
  * @version 0.0.1 (hiver 2021)
